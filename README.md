@@ -310,12 +310,44 @@ ubicaciones-gold-media-test/
 ```
 
 ### 🗄️ Base de Datos
-El plugin crea la tabla `wp_ubicaciones_contactos` para almacenar:
-- Datos de contacto completos
-- Tipo de solicitud (consulta/cita)
-- Estado de seguimiento
-- Información técnica (IP, fecha)
-- Notas administrativas
+
+#### 📊 Tablas Utilizadas
+
+**1. `wp_posts` - Ubicaciones principales**
+- `ID` - ID único de la ubicación
+- `post_title` - Nombre/título de la ubicación  
+- `post_content` - Descripción de la ubicación
+- `post_excerpt` - Extracto/resumen
+- `post_type = 'ubicaciones'` - Tipo de contenido
+- `post_status` - Estado (publish, draft, etc.)
+
+**2. `wp_postmeta` - Datos específicos de ubicaciones**
+- `_ubicacion_latitud` - Coordenada de latitud
+- `_ubicacion_longitud` - Coordenada de longitud  
+- `_ubicacion_direccion` - Dirección completa
+- `_ubicacion_place_id` - Google Place ID
+- `_ubicacion_telefono` - Teléfono de contacto
+- `_ubicacion_email` - Email de contacto
+- `_ubicacion_horarios` - Horarios de atención
+
+**3. `wp_ubicaciones_contactos` - Solicitudes de contacto (tabla personalizada)**
+- `id` - ID autoincremental
+- `ubicacion_id` - ID de la ubicación relacionada
+- `ubicacion_nombre` - Nombre de la ubicación  
+- `tipo_solicitud` - Tipo (consulta/cita)
+- `nombre_completo` - Nombre del contacto
+- `email` - Email del contacto
+- `telefono` - Teléfono del contacto
+- `empresa` - Empresa (opcional)
+- `mensaje` - Mensaje del contacto
+- `datos_adicionales` - JSON con datos extra (asunto, fecha_cita, etc.)
+- `fecha_envio` - Fecha de la solicitud
+- `ip_cliente` - IP del cliente
+- `estado` - Estado (pendiente/procesando/completado/cerrado)
+- `fecha_procesado` - Fecha de procesamiento
+- `notas_admin` - Notas del administrador
+
+> 💡 **Nota**: Las ubicaciones siguen la estructura estándar de WordPress (Custom Post Type) para máxima compatibilidad, mientras que las solicitudes de contacto usan una tabla personalizada para funcionalidades específicas.
 
 ### 🔗 APIs de Google Utilizadas
 - **Maps JavaScript API** - Mapas interactivos
