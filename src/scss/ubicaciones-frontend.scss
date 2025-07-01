@@ -1,0 +1,411 @@
+/**
+ * Estilos CSS para Ubicaciones - Frontend
+ * Estilos para la visualización de mapas y ubicaciones en el frontend
+ */
+
+/* === CONTENEDORES DE MAPAS === */
+.mapa-ubicacion,
+.mapa-ubicaciones-shortcode,
+#mapa-archivo-ubicaciones {
+    width: 100%;
+    height: 400px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    background: #f9f9f9;
+    overflow: hidden;
+}
+
+/* Mapas en dispositivos móviles */
+@media (max-width: 768px) {
+    .mapa-ubicacion,
+    .mapa-ubicaciones-shortcode,
+    #mapa-archivo-ubicaciones {
+        height: 300px;
+        margin: 15px 0;
+    }
+}
+
+/* === PÁGINAS DE UBICACIONES === */
+.ubicacion-single {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.ubicacion-header {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.ubicacion-header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.ubicacion-meta {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.ubicacion-meta-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.ubicacion-meta-item .icono {
+    font-size: 1.2em;
+    color: #0073aa;
+    min-width: 20px;
+}
+
+.ubicacion-meta-item .contenido h4 {
+    margin: 0 0 5px 0;
+    font-size: 1em;
+    color: #333;
+    font-weight: 600;
+}
+
+.ubicacion-meta-item .contenido p {
+    margin: 0;
+    color: #666;
+    line-height: 1.4;
+}
+
+.ubicacion-meta-item .contenido a {
+    color: #0073aa;
+    text-decoration: none;
+}
+
+.ubicacion-meta-item .contenido a:hover {
+    text-decoration: underline;
+}
+
+/* === ARCHIVO DE UBICACIONES === */
+.ubicaciones-archive {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.ubicaciones-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin: 30px 0;
+}
+
+.ubicacion-card {
+    background: #fff;
+    border: 1px solid #e1e1e1;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ubicacion-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.ubicacion-card .thumbnail {
+    height: 200px;
+    background: #f0f0f0;
+    overflow: hidden;
+}
+
+.ubicacion-card .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ubicacion-card .content {
+    padding: 20px;
+}
+
+.ubicacion-card .content h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.3em;
+    color: #333;
+}
+
+.ubicacion-card .content h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.ubicacion-card .content h3 a:hover {
+    color: #0073aa;
+}
+
+.ubicacion-card .excerpt {
+    color: #666;
+    font-size: 0.95em;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.ubicacion-card .meta-info {
+    font-size: 0.9em;
+    color: #888;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 15px;
+}
+
+.ubicacion-card .meta-info .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.ubicacion-card .meta-info .meta-item:last-child {
+    margin-bottom: 0;
+}
+
+.ubicacion-card .meta-info .icono {
+    color: #0073aa;
+    min-width: 16px;
+}
+
+/* === FILTROS Y BÚSQUEDA === */
+.ubicaciones-filtros {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.ubicaciones-filtros h3 {
+    margin: 0 0 15px 0;
+    font-size: 1.1em;
+    color: #333;
+}
+
+.filtros-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    align-items: end;
+}
+
+.filtros-form .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.filtros-form label {
+    font-weight: 600;
+    color: #333;
+    font-size: 0.9em;
+}
+
+.filtros-form input,
+.filtros-form select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.filtros-form button {
+    background: #0073aa;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.filtros-form button:hover {
+    background: #005a87;
+}
+
+/* === INFORMACIÓN DE VENTANAS === */
+.info-window {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.info-window h4 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.info-window p {
+    margin: 8px 0;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.info-window a {
+    color: #0073aa;
+    text-decoration: none;
+}
+
+.info-window a:hover {
+    text-decoration: underline;
+}
+
+/* === MENSAJES DE ERROR === */
+.error-mapa,
+.sin-ubicaciones {
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    padding: 50px 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+/* === BOTONES DE ACCIÓN === */
+.ubicacion-acciones {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.boton-direcciones {
+    background: #4285f4;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 600;
+    transition: background 0.2s ease;
+}
+
+.boton-direcciones:hover {
+    background: #3367d6;
+    color: white;
+    text-decoration: none;
+}
+
+.boton-compartir {
+    background: #34a853;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    display: inline-block;
+    font-weight: 600;
+    margin-left: 10px;
+    transition: background 0.2s ease;
+}
+
+.boton-compartir:hover {
+    background: #2d8f47;
+    color: white;
+    text-decoration: none;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+    .ubicacion-single,
+    .ubicaciones-archive {
+        padding: 15px;
+    }
+    
+    .ubicacion-meta {
+        grid-template-columns: 1fr;
+        padding: 15px;
+    }
+    
+    .ubicaciones-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .filtros-form {
+        grid-template-columns: 1fr;
+    }
+    
+    .ubicacion-header h1 {
+        font-size: 2em;
+    }
+    
+    .boton-direcciones,
+    .boton-compartir {
+        display: block;
+        margin: 10px auto;
+        max-width: 200px;
+    }
+}
+
+/* === ANIMACIONES === */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.ubicacion-card {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* === ACCESIBILIDAD === */
+.mapa-ubicacion:focus,
+.mapa-ubicaciones-shortcode:focus,
+#mapa-archivo-ubicaciones:focus {
+    outline: 2px solid #0073aa;
+    outline-offset: 2px;
+}
+
+/* Contraste mejorado para lectores de pantalla */
+@media (prefers-contrast: high) {
+    .ubicacion-card {
+        border: 2px solid #000;
+    }
+    
+    .info-window a {
+        color: #0056b3;
+        font-weight: 600;
+    }
+}
+
+/* === MODO OSCURO === */
+@media (prefers-color-scheme: dark) {
+    .ubicacion-meta {
+        background: #2d3748;
+        border-color: #4a5568;
+        color: #e2e8f0;
+    }
+    
+    .ubicaciones-filtros {
+        background: #2d3748;
+        border-color: #4a5568;
+        color: #e2e8f0;
+    }
+    
+    .ubicacion-card {
+        background: #2d3748;
+        border-color: #4a5568;
+        color: #e2e8f0;
+    }
+    
+    .ubicacion-card .content h3 {
+        color: #e2e8f0;
+    }
+}

@@ -1,0 +1,395 @@
+/**
+ * Utilidades y helpers para el modal de contacto
+ * Clases de utilidad siguiendo metodología BEM con SCSS
+ */
+
+// Variables para utilidades
+$utility-colors: (
+    'primary': #0073aa,
+    'success': #28a745,
+    'warning': #ffc107,
+    'danger': #dc3545,
+    'muted': #6c757d,
+    'light': #f8f9fa
+);
+
+$utility-spacings: (
+    'xs': 5px,
+    'sm': 10px,
+    'md': 15px,
+    'lg': 20px,
+    'xl': 25px,
+    'xxl': 30px
+);
+
+$utility-sizes: (
+    'small': 8px 16px,
+    'medium': 12px 24px,
+    'large': 16px 32px
+);
+
+/* UTILITY CLASSES */
+.u-text {
+    &-center { text-align: center !important; }
+    &-left { text-align: left !important; }
+    &-right { text-align: right !important; }
+}
+
+.u-display {
+    &-none { display: none !important; }
+    &-block { display: block !important; }
+    &-flex { display: flex !important; }
+    &-inline { display: inline !important; }
+    &-inline-block { display: inline-block !important; }
+}
+
+.u-width {
+    &-full { width: 100% !important; }
+    &-half { width: 50% !important; }
+    &-third { width: 33.333% !important; }
+    &-quarter { width: 25% !important; }
+}
+
+// Generate margin utilities
+@each $name, $size in $utility-spacings {
+    .u-margin {
+        &-#{$name} { margin: $size !important; }
+        &-top-#{$name} { margin-top: $size !important; }
+        &-bottom-#{$name} { margin-bottom: $size !important; }
+        &-left-#{$name} { margin-left: $size !important; }
+        &-right-#{$name} { margin-right: $size !important; }
+        &-x-#{$name} { 
+            margin-left: $size !important; 
+            margin-right: $size !important; 
+        }
+        &-y-#{$name} { 
+            margin-top: $size !important; 
+            margin-bottom: $size !important; 
+        }
+    }
+}
+
+// Generate padding utilities
+@each $name, $size in $utility-spacings {
+    .u-padding {
+        &-#{$name} { padding: $size !important; }
+        &-top-#{$name} { padding-top: $size !important; }
+        &-bottom-#{$name} { padding-bottom: $size !important; }
+        &-left-#{$name} { padding-left: $size !important; }
+        &-right-#{$name} { padding-right: $size !important; }
+        &-x-#{$name} { 
+            padding-left: $size !important; 
+            padding-right: $size !important; 
+        }
+        &-y-#{$name} { 
+            padding-top: $size !important; 
+            padding-bottom: $size !important; 
+        }
+    }
+}
+
+// Generate color utilities
+@each $name, $color in $utility-colors {
+    .u-color-#{$name} { color: $color !important; }
+    .u-bg-#{$name} { background-color: $color !important; }
+    .u-border-#{$name} { border-color: $color !important; }
+}
+
+/* FORM VALIDATION STATES */
+@each $state, $color in ('success': #28a745, 'warning': #ffc107, 'error': #dc3545) {
+    .form-group--#{$state} {
+        .form-group__input,
+        .form-group__textarea,
+        .form-group__select {
+            border-color: $color;
+            box-shadow: 0 0 0 3px rgba($color, 0.1);
+        }
+        
+        .form-group__message {
+            color: $color;
+        }
+    }
+}
+
+/* VALIDATION MESSAGES */
+.form-group__message {
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+    
+    @each $state, $color in ('error': #dc3545, 'success': #28a745, 'warning': #ffc107) {
+        &--#{$state} {
+            color: $color;
+        }
+    }
+}
+
+/* BUTTON VARIATIONS */
+.btn {
+    // Generate button sizes
+    @each $name, $padding in $utility-sizes {
+        &--#{$name} {
+            padding: $padding;
+            
+            @if $name == 'small' {
+                font-size: 12px;
+            } @else if $name == 'large' {
+                font-size: 16px;
+            }
+        }
+    }
+    
+    &--full-width {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    &--rounded {
+        border-radius: 50px;
+    }
+    
+    &--square {
+        border-radius: 0;
+    }
+    
+    &--outline {
+        background: transparent;
+        border: 2px solid currentColor;
+        
+        &:hover {
+            background: currentColor;
+            color: white;
+        }
+    }
+}
+
+/* LOADING STATES */
+.form-group--loading {
+    .form-group__input,
+    .form-group__textarea,
+    .form-group__select {
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cg fill='%23666'%3E%3Ccircle cx='10' cy='3' r='2'/%3E%3Ccircle cx='10' cy='17' r='2' opacity='0.3'/%3E%3Ccircle cx='17' cy='10' r='2' opacity='0.6'/%3E%3Ccircle cx='3' cy='10' r='2' opacity='0.9'/%3E%3C/g%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 16px;
+        animation: loading-rotate 1s linear infinite;
+    }
+}
+
+@keyframes loading-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* MODAL VARIATIONS */
+.modal-contacto {
+    &--small .modal-contacto__container {
+        max-width: 400px;
+    }
+    
+    &--large .modal-contacto__container {
+        max-width: 800px;
+    }
+    
+    &--fullscreen .modal-contacto__container {
+        width: 95%;
+        height: 95%;
+        max-width: none;
+        max-height: none;
+    }
+    
+    &--no-padding .modal-contacto__body {
+        padding: 0;
+    }
+    
+    &--blur-background .modal-contacto__overlay {
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+    }
+}
+
+/* ANIMATION DELAYS (for staggered animations) */
+@for $i from 1 through 6 {
+    .opcion-btn:nth-child(#{$i}) { 
+        animation-delay: #{$i * 0.1}s; 
+    }
+    
+    .form-group:nth-child(#{$i}) { 
+        animation-delay: #{$i * 0.05}s; 
+    }
+}
+
+/* THEME VARIATIONS */
+.modal-contacto {
+    &--theme-dark {
+        .modal-contacto__container {
+            background: #2d3748;
+            color: #e2e8f0;
+        }
+        
+        .form-group__input,
+        .form-group__textarea,
+        .form-group__select {
+            background: #4a5568;
+            border-color: #718096;
+            color: #e2e8f0;
+        }
+        
+        .opcion-btn {
+            background: #4a5568;
+            border-color: #718096;
+            color: #e2e8f0;
+        }
+    }
+    
+    &--theme-minimal {
+        .modal-contacto__container {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .modal-contacto__header {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .modal-contacto__footer {
+            border-top: none;
+            padding-top: 0;
+        }
+    }
+}
+
+/* PRINT STYLES */
+@media print {
+    .modal-contacto {
+        position: relative;
+        z-index: auto;
+        background: white;
+        
+        &__overlay {
+            display: none;
+        }
+        
+        &__container {
+            box-shadow: none;
+            border: 1px solid #000;
+            animation: none;
+        }
+        
+        &__close {
+            display: none;
+        }
+        
+        .btn {
+            display: none;
+        }
+        
+        .progress-bar {
+            display: none;
+        }
+    }
+}
+
+/* HELPER CLASSES FOR JAVASCRIPT */
+.js-modal-opening {
+    overflow: hidden;
+}
+
+.js-modal-closing .modal-contacto {
+    animation: modal-contacto--fade-out 0.3s ease;
+}
+
+.js-modal-closing .modal-contacto__container {
+    animation: modal-contacto--slide-out 0.3s ease;
+}
+
+@keyframes modal-contacto--fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes modal-contacto--slide-out {
+    from { 
+        transform: translateY(0); 
+        opacity: 1; 
+    }
+    to { 
+        transform: translateY(-50px); 
+        opacity: 0; 
+    }
+}
+
+/* FOCUS MANAGEMENT */
+.modal-contacto--focus-trapped {
+    /* Estilo especial cuando el foco está atrapado en el modal */
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* RESPONSIVE UTILITIES */
+@media (max-width: 768px) {
+    .u-hidden-mobile { display: none !important; }
+    .u-visible-mobile { display: block !important; }
+}
+
+@media (min-width: 769px) {
+    .u-hidden-desktop { display: none !important; }
+    .u-visible-desktop { display: block !important; }
+}
+
+/* ACCESSIBILITY IMPROVEMENTS */
+.modal-contacto {
+    &:focus-within {
+        outline: none;
+    }
+    
+    &__close:focus,
+    .btn:focus,
+    .opcion-btn:focus {
+        outline: 2px solid #0073aa;
+        outline-offset: 2px;
+    }
+}
+
+/* HIGH CONTRAST SUPPORT */
+@media (prefers-contrast: high) {
+    .modal-contacto__container {
+        border: 2px solid #000;
+    }
+    
+    .opcion-btn,
+    .form-group__input,
+    .form-group__textarea,
+    .form-group__select {
+        border-color: #000;
+    }
+    
+    .btn--primary {
+        background: #000;
+        border: 1px solid #000;
+    }
+}
+
+/* REDUCED MOTION SUPPORT */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .opcion-btn:hover {
+        transform: none;
+    }
+}

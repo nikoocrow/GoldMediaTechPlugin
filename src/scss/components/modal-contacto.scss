@@ -1,0 +1,562 @@
+/**
+ * Modal de Contacto - Estilos con metodología BEM
+ * Block: modal-contacto
+ */
+
+// Variables SCSS para el modal
+$modal-z-index: 10000;
+$modal-border-radius: 12px;
+$modal-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+$modal-overlay-bg: rgba(0, 0, 0, 0.6);
+$modal-bg: white;
+$modal-text: #333;
+$modal-border: #eee;
+
+// Colores
+$primary-color: #000;
+$primary-hover: #005a87;
+$secondary-color: #6c757d;
+$secondary-hover: #545b62;
+$success-color: #28a745;
+$success-hover: #218838;
+$error-color: #e74c3c;
+$warning-color: #ffc107;
+
+// Espaciado
+$spacing-xs: 5px;
+$spacing-sm: 10px;
+$spacing-md: 15px;
+$spacing-lg: 20px;
+$spacing-xl: 25px;
+$spacing-xxl: 30px;
+
+// Transiciones
+$transition-base: 0.3s ease;
+$transition-fast: 0.2s ease;
+
+/* BLOCK: modal-contacto */
+.modal-contacto {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: $modal-z-index;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: modal-contacto--fade-in $transition-base;
+    
+    /* ELEMENT: modal-contacto__overlay */
+    &__overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: $modal-overlay-bg;
+        cursor: pointer;
+    }
+    
+    /* ELEMENT: modal-contacto__container */
+    &__container {
+        background: $modal-bg;
+        border-radius: $modal-border-radius;
+        width: 90%;
+        max-width: 600px;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        box-shadow: $modal-shadow;
+        animation: modal-contacto--slide-in $transition-base;
+    }
+    
+    /* ELEMENT: modal-contacto__header */
+    &__header {
+        padding: $spacing-lg $spacing-xl $spacing-md;
+        border-bottom: 1px solid $modal-border;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    /* ELEMENT: modal-contacto__title */
+    &__title {
+        margin: 0;
+        color: $modal-text;
+        font-size: 1.3em;
+        font-weight: 600;
+    }
+    
+    /* ELEMENT: modal-contacto__close */
+    &__close {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: #666;
+        padding: 0;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: background $transition-fast;
+        
+        /* MODIFIER: modal-contacto__close--hover */
+        &:hover {
+            background: #f0f0f0;
+            color: $modal-text;
+        }
+        
+        &:focus {
+            outline: 2px solid $primary-color;
+            outline-offset: 2px;
+        }
+    }
+    
+    /* ELEMENT: modal-contacto__body */
+    &__body {
+        padding: $spacing-xl;
+    }
+    
+    /* ELEMENT: modal-contacto__footer */
+    &__footer {
+        padding: $spacing-md $spacing-xl $spacing-xl;
+        border-top: 1px solid $modal-border;
+        display: flex;
+        gap: $spacing-sm;
+        justify-content: flex-end;
+    }
+}
+
+/* BLOCK: progress-bar */
+.progress-bar {
+    height: 4px;
+    background: #e0e0e0;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: $spacing-lg;
+    
+    /* ELEMENT: progress-bar__fill */
+    &__fill {
+        height: 100%;
+        background: $primary-color;
+        border-radius: 2px;
+        transition: width $transition-base;
+        
+        /* MODIFIERS: progress-bar__fill--step-* */
+        &--step-1 { width: 33%; }
+        &--step-2 { width: 66%; }
+        &--step-3 { width: 100%; }
+    }
+}
+
+/* BLOCK: opciones-selector */
+.opciones-selector {
+    margin: $spacing-lg 0;
+    
+    /* ELEMENT: opciones-selector__container */
+    &__container {
+        display: flex;
+        gap: $spacing-lg;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    /* ELEMENT: opciones-selector__descripcion */
+    &__descripcion {
+        text-align: center;
+        color: #666;
+        margin-bottom: $spacing-xxl;
+        font-size: 1em;
+        line-height: 1.5;
+    }
+}
+
+/* BLOCK: opcion-btn */
+.opcion-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: $spacing-xxl $spacing-lg;
+    border: 2px solid #e0e0e0;
+    border-radius: $modal-border-radius;
+    background: white;
+    cursor: pointer;
+    transition: all $transition-base;
+    text-align: center;
+    width: 100%;
+    max-width: 250px;
+    text-decoration: none;
+    color: inherit;
+    
+    /* MODIFIER: opcion-btn--hover */
+    &:hover {
+        border-color: $primary-color;
+        box-shadow: 0 4px 12px rgba(0, 115, 170, 0.15);
+        transform: translateY(-2px);
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    /* MODIFIER: opcion-btn--selected */
+    &--selected {
+        border-color: $primary-color;
+        background: #f0f8ff;
+    }
+    
+    &:focus {
+        outline: 2px solid $primary-color;
+        outline-offset: 2px;
+    }
+    
+    /* ELEMENT: opcion-btn__icono */
+    &__icono {
+        font-size: 48px;
+        margin-bottom: $spacing-md;
+        display: block;
+    }
+    
+    /* ELEMENT: opcion-btn__titulo */
+    &__titulo {
+        margin: 0 0 8px 0;
+        color: $modal-text;
+        font-size: 1.1em;
+        font-weight: 600;
+    }
+    
+    /* ELEMENT: opcion-btn__descripcion */
+    &__descripcion {
+        margin: 0;
+        color: #666;
+        font-size: 0.9em;
+        line-height: 1.4;
+    }
+}
+
+/* BLOCK: formulario-contacto */
+.formulario-contacto {
+    margin-top: $spacing-sm;
+}
+
+/* BLOCK: form-group */
+.form-group {
+    margin-bottom: $spacing-lg;
+    
+    /* MODIFIER: form-group--required */
+    &--required .form-group__label::after {
+        content: " *";
+        color: $error-color;
+        font-weight: 600;
+    }
+    
+    /* ELEMENT: form-group__label */
+    &__label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: $modal-text;
+        font-size: 14px;
+    }
+    
+    /* ELEMENTS: form-group inputs */
+    &__input,
+    &__textarea,
+    &__select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 14px;
+        font-family: inherit;
+        transition: border-color $transition-base;
+        box-sizing: border-box;
+        
+        /* MODIFIER: focus state */
+        &:focus {
+            outline: none;
+            border-color: $primary-color;
+            box-shadow: 0 0 0 3px rgba(0, 115, 170, 0.1);
+        }
+        
+        /* MODIFIER: error state */
+        &--error {
+            border-color: $error-color;
+            
+            &:focus {
+                box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1);
+            }
+        }
+    }
+    
+    /* ELEMENT: form-group__textarea specific */
+    &__textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+}
+
+/* BLOCK: btn */
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all $transition-base;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    font-family: inherit;
+    line-height: 1;
+    
+    /* MODIFIER: btn--primary */
+    &--primary {
+        background: $primary-color;
+        color: white;
+        
+        &:hover {
+            background: $primary-hover;
+            color: white;
+            text-decoration: none;
+        }
+    }
+    
+    /* MODIFIER: btn--secondary */
+    &--secondary {
+        background: $secondary-color;
+        color: white;
+        
+        &:hover {
+            background: $secondary-hover;
+            color: white;
+            text-decoration: none;
+        }
+    }
+    
+    /* MODIFIER: btn--success */
+    &--success {
+        background: $success-color;
+        color: white;
+        
+        &:hover {
+            background: $success-hover;
+            color: white;
+            text-decoration: none;
+        }
+    }
+    
+    /* MODIFIER: btn--disabled */
+    &--disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    
+    &:focus {
+        outline: 2px solid $primary-color;
+        outline-offset: 2px;
+    }
+}
+
+/* BLOCK: loading-spinner */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #333;
+    border-radius: 50%;
+    animation: loading-spinner--spin 1s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* BLOCK: mensaje-exito */
+.mensaje-exito {
+    text-align: center;
+    padding: 40px $spacing-lg;
+    
+    /* ELEMENT: mensaje-exito__icono */
+    &__icono {
+        font-size: 64px;
+        color: $success-color;
+        margin-bottom: $spacing-lg;
+        display: block;
+    }
+    
+    /* ELEMENT: mensaje-exito__titulo */
+    &__titulo {
+        color: $success-color;
+        margin-bottom: $spacing-md;
+        font-size: 1.3em;
+        font-weight: 600;
+    }
+    
+    /* ELEMENT: mensaje-exito__descripcion */
+    &__descripcion {
+        color: #666;
+        line-height: 1.5;
+        margin-bottom: $spacing-sm;
+    }
+}
+
+/* ANIMATIONS */
+@keyframes modal-contacto--fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes modal-contacto--slide-in {
+    from { 
+        transform: translateY(-50px); 
+        opacity: 0; 
+    }
+    to { 
+        transform: translateY(0); 
+        opacity: 1; 
+    }
+}
+
+@keyframes loading-spinner--spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+    .modal-contacto {
+        &__container {
+            width: 95%;
+            margin: $spacing-lg;
+            max-height: 95vh;
+        }
+        
+        &__header {
+            padding: $spacing-md $spacing-lg $spacing-sm;
+        }
+        
+        &__body {
+            padding: $spacing-lg;
+        }
+        
+        &__footer {
+            padding: $spacing-sm $spacing-lg $spacing-lg;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        &__title {
+            font-size: 1.1em;
+        }
+    }
+    
+    .opciones-selector__container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .opcion-btn {
+        max-width: 100%;
+    }
+    
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-contacto__container {
+        width: 98%;
+        margin: $spacing-sm;
+    }
+    
+    .opcion-btn {
+        padding: 25px $spacing-md;
+        
+        &__icono {
+            font-size: 40px;
+        }
+    }
+    
+    .mensaje-exito__icono {
+        font-size: 48px;
+    }
+}
+
+/* ACCESSIBILITY */
+@media (prefers-reduced-motion: reduce) {
+    .modal-contacto,
+    .modal-contacto__container,
+    .opcion-btn,
+    .btn,
+    .form-group__input,
+    .form-group__textarea,
+    .form-group__select,
+    .loading-spinner {
+        animation: none;
+        transition: none;
+    }
+    
+    .opcion-btn:hover {
+        transform: none;
+    }
+}
+
+/* HIGH CONTRAST MODE */
+@media (prefers-contrast: high) {
+    .modal-contacto__container {
+        border: 2px solid #000;
+    }
+    
+    .opcion-btn {
+        border-color: #000;
+    }
+    
+    .btn--primary {
+        background: #000;
+        border: 1px solid #000;
+    }
+    
+    .form-group__input,
+    .form-group__textarea,
+    .form-group__select {
+        border-color: #000;
+    }
+}
+
+/* DARK MODE */
+@media (prefers-color-scheme: dark) {
+    .modal-contacto:not(.modal-contacto--light) {
+        .modal-contacto__container {
+            background: #2d3748;
+            color: #e2e8f0;
+        }
+        
+        .modal-contacto__title {
+            color: #e2e8f0;
+        }
+        
+        .form-group__input,
+        .form-group__textarea,
+        .form-group__select {
+            background: #4a5568;
+            border-color: #718096;
+            color: #e2e8f0;
+        }
+        
+        .form-group__label {
+            color: #e2e8f0;
+        }
+        
+        .opcion-btn {
+            background: #4a5568;
+            border-color: #718096;
+            color: #e2e8f0;
+        }
+    }
+}

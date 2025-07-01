@@ -1,0 +1,13 @@
+
+/*# sourceMappingURL=main.css.map */
+/**
+ * Archivo principal SCSS para el plugin Ubicaciones
+ * Importa todos los componentes y estilos
+ */
+
+
+@import 'ubicaciones-frontend';
+
+
+@import 'components/modal-contacto';
+@import 'components/modal-contacto-utils';
